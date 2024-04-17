@@ -1,6 +1,6 @@
 function reverseString(str) {
   // 1
-  // return str.split('').reverse().join('')git remote add origin https://github.com/nikita-nafikov/home-work-js.git
+  return str.split('').reverse().join('')
   // 2
   // return [...str].reverse().join('')
   // 3
