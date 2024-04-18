@@ -35,9 +35,48 @@ A component will not appear at all if its value happens to be zero. Hence, 1 min
 *  Формально длительность, указанная в компоненте, не должна превышать любую допустимую более значимую единицу времени.
 *
 * * */
-function formatDuration (seconds) {
+function formatDuration(seconds) {
+    if (seconds === 0) {
+        return "now";
+    }
 
+    const units = [];
+
+    const addUnit = (value, unit) => {
+        if (value === 1) {
+            units.push(`${value} ${unit}`);
+        } else if (value > 1) {
+            units.push(`${value} ${unit}s`);
+        }
+    };
+
+    const years = Math.floor(seconds / (365 * 24 * 60 * 60));
+    seconds -= years * (365 * 24 * 60 * 60);
+    addUnit(years, "year");
+
+    const days = Math.floor(seconds / (24 * 60 * 60));
+    seconds -= days * (24 * 60 * 60);
+    addUnit(days, "day");
+
+    const hours = Math.floor(seconds / (60 * 60));
+    seconds -= hours * (60 * 60);
+    addUnit(hours, "hour");
+
+    const minutes = Math.floor(seconds / 60);
+    seconds -= minutes * 60;
+    addUnit(minutes, "minute");
+
+    addUnit(seconds, "second");
+
+    let result = units.join(", ");
+    const lastIndex = result.lastIndexOf(",");
+    if (lastIndex !== -1) {
+        result = result.substring(0, lastIndex) + " and" + result.substring(lastIndex + 1);
+    }
+
+    return result;
 }
+
 
 
 

@@ -6,10 +6,19 @@
 Note: оценки всегда будут уникальными (поэтому никаких повторяющихся значений) */
 
 function myLanguages(results) {
+    let languages = [];
 
+    for (let language in results) {
+        if (results[language] >= 60) {
+            languages.push(language);
+        }
+    }
+
+    languages.sort((a, b) => results[b] - results[a]);
+
+    return languages;
 }
-
-
+//массив для >60, проходим по словарю, добавляем в массив
 
 
 
